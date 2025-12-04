@@ -74,7 +74,7 @@ for link in all_links:
         except:
             birth = ""
 
-        # 3. Lay ngay mat (Died) - ĐÂY LÀ PHẦN BẠN THIẾU
+        # 3. Lay ngay mat
         try:
             death_element = driver.find_element(By.XPATH, "//th[text()='Died']/following-sibling::td")
             death_raw = death_element.text
