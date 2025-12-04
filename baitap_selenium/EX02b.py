@@ -3,8 +3,8 @@ from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import time
 import pandas as pd
+import time
 
 # -------------------------------
 # Cấu hình Firefox + geckodriver
@@ -27,7 +27,6 @@ url = "https://gochek.vn/"
 driver.get(url)
 time.sleep(3)
 
-# =====================
 # Click "Xem thêm" để load toàn bộ sản phẩm
 # ----------------------------
 for _ in range(10):
@@ -87,6 +86,6 @@ df = pd.DataFrame({
     "Giá bán": gia_ban,
     "Hình ảnh": hinh_anh
 })
-df.to_excel("gochek_sanpham.xlsx", index=False)
+df.to_excel("gochek_sanpham.xlsx", index=False, engine='xlsxwriter')
 print("Đã lưu dữ liệu ra gochek_sanpham.xlsx")
 driver.quit()
