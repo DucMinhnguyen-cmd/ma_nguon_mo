@@ -18,7 +18,6 @@ time.sleep(3)
 # 2️⃣ Nhập email
 email_input = driver.find_element(By.NAME, "email")
 email_input.send_keys(TUMBLR_EMAIL)
-email_input.send_keys(Keys.ENTER)
 time.sleep(3)
 
 # 3️⃣ Nhập password
@@ -27,7 +26,7 @@ password_input.send_keys(TUMBLR_PASSWORD)
 password_input.send_keys(Keys.ENTER)
 time.sleep(5)
 
-print("🔐 Đăng nhập thành công Tumblr!")
+print(" Đăng nhập thành công Tumblr!")
 
 # 4️⃣ Truy cập Dashboard
 driver.get("https://www.tumblr.com/dashboard")
