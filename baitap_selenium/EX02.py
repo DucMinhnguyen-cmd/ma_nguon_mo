@@ -30,9 +30,7 @@ url = 'https://nhathuoclongchau.com.vn/thuc-pham-chuc-nang/vitamin-khoang-chat'
 driver.get(url)
 time.sleep(2)  # Chờ trang load
 
-# -------------------------------
 #  Click "Xem thêm sản phẩm" nhiều lần
-# -------------------------------
 body = driver.find_element(By.TAG_NAME, "body")
 time.sleep(1)
 
@@ -69,7 +67,6 @@ ten_san_pham = []
 gia_ban = []
 hinh_anh = []
 
-# Tìm tất cả button "Chọn mua"
 buttons = driver.find_elements(By.XPATH, "//button[text()='Chọn mua']")
 print(f"Tìm thấy {len(buttons)} sản phẩm")
 
