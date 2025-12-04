@@ -6,27 +6,27 @@ from selenium.webdriver.common.keys import Keys
 import pandas as pd
 import time
 
-# -------------------------------
-# Cấu hình Firefox + geckodriver
-# -------------------------------
-
-gecko_path = r"D:\Program\lo\ma_nguon_mo\baitap_selenium\geckodriver.exe" 
-firefox_binary = r"C:\\Program Files\\Mozilla Firefox\\firefox.exe"  
+# ----------------------------
+# Cấu hình Selenium + Firefox
+# ----------------------------
+gecko_path = r"D:\Program\lo\ma_nguon_mo\baitap_selenium\geckodriver.exe"  # Đường dẫn geckodriver
+firefox_binary = r"C:\Program Files\Mozilla Firefox\firefox.exe"  # Đường dẫn Firefox
 
 service = Service(gecko_path)
 options = Options()
 options.binary_location = firefox_binary
-options.headless = False 
+options.headless = False  # True nếu muốn chạy ẩn không mở trình duyệt
 
 driver = webdriver.Firefox(service=service, options=options)
 
-# -------------------------------
-# Mở trang GOCHEK
-# -------------------------------
-url = "https://gochek.vn/"
+# ----------------------------
+# Vào trang web
+# ----------------------------
+url = 'https://gochek.vn/'
 driver.get(url)
-time.sleep(3)
+time.sleep(2)
 
+# ----------------------------
 # Click "Xem thêm" để load toàn bộ sản phẩm
 # ----------------------------
 for _ in range(10):
@@ -86,6 +86,4 @@ df = pd.DataFrame({
     "Giá bán": gia_ban,
     "Hình ảnh": hinh_anh
 })
-df.to_excel("gochek_sanpham.xlsx", index=False, engine='xlsxwriter')
-print("Đã lưu dữ liệu ra gochek_sanpham.xlsx")
 driver.quit()
