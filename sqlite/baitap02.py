@@ -80,7 +80,7 @@ for count, link in enumerate(all_links):
 
 driver.quit()
 
-conn = sqlite3.connect("painters.db")
+conn = sqlite3.connect("hoa_si.db")
 cursor = conn.cursor()
 
 cursor.execute("""
