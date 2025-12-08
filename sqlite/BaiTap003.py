@@ -175,9 +175,8 @@ print(run_query("SELECT DISTINCT unit FROM products;"))
 print("\n6. Tổng số sản phẩm:")
 print(run_query("SELECT COUNT(*) AS total_products FROM products;"))
 
-# -------------------------------
+
 # Nhóm 2: Khảo sát và phân tích
-# -------------------------------
 print("\n========== Nhóm 2: Khảo sát và phân tích ==========")
 
 # 7. Top 10 sản phẩm giảm giá nhiều nhất (chênh lệch giữa original_price và price)
@@ -220,42 +219,16 @@ FROM products
 WHERE price BETWEEN 100000 AND 200000;
 """))
 
-# -------------------------------
+
 # Nhóm 3: Truy vấn nâng cao
-# -------------------------------
+
 print("\n========== Nhóm 3: Truy vấn nâng cao ==========")
 
 # 12. Sắp xếp sản phẩm theo giá bán tăng dần
 print("\n12. Sắp xếp theo giá bán tăng dần:")
 print(run_query("SELECT product_name, price FROM products ORDER BY price ASC;"))
 
-# 13. Tính % giảm giá và lấy top 5 sản phẩm giảm giá nhiều nhất
-print("\n13. Top 5 sản phẩm giảm giá % nhiều nhất:")
-print(run_query("""
-SELECT product_name, price, original_price,
-       ROUND(((original_price - price) * 100.0 / original_price), 2) AS discount_percent
-FROM products
-WHERE original_price > 0 AND price < original_price
-ORDER BY discount_percent DESC
-LIMIT 5;
-"""))
 
-# 14. Phân tích nhóm giá (dưới 50k, 50k-100k, trên 100k)
-print("\n14. Phân tích nhóm giá:")
-print(run_query("""
-SELECT CASE
-         WHEN price < 50000 THEN 'Dưới 50k'
-         WHEN price BETWEEN 50000 AND 100000 THEN '50k-100k'
-         ELSE 'Trên 100k'
-       END AS price_group,
-       COUNT(*) AS count_group
-FROM products
-GROUP BY price_group;
-"""))
-
-# 15. Liệt kê các bản ghi có URL không hợp lệ (NULL hoặc rỗng)
-print("\n15. URL không hợp lệ:")
-print(run_query("SELECT * FROM products WHERE product_url IS NULL OR product_url = '';"))
 
 # Đóng kết nối sau khi chạy xong
 conn.close()
