@@ -3,28 +3,23 @@
 # -------------------------------
 
 # Import các thư viện cần thiết
-import sqlite3, os, re, time          # sqlite3: làm việc với DB, os: thao tác file, re: regex, time: delay
-import pandas as pd                   # pandas: quản lý dữ liệu dạng bảng
-from selenium import webdriver        # webdriver: điều khiển trình duyệt
-from selenium.webdriver.common.by import By   # By: cách tìm phần tử trên trang
-from selenium.webdriver.common.keys import Keys # Keys: gửi phím (PAGE_DOWN...)
+import sqlite3, os, re, time          
+import pandas as pd                  
+from selenium import webdriver        
+from selenium.webdriver.common.by import By   
+from selenium.webdriver.common.keys import Keys 
 
-# -------------------------------
-# 1. TẠO CƠ SỞ DỮ LIỆU SQLITE
-# -------------------------------
 
 # Đường dẫn tới file SQLite database
 DB_FILE = r"D:\Program\lo\ma_nguon_mo\sqlite\longchau.db"
 
-# Nếu file DB đã tồn tại thì xóa đi để tạo mới
 if os.path.exists(DB_FILE): 
     os.remove(DB_FILE)
 
-# Kết nối tới SQLite (nếu chưa có file thì sẽ tự tạo)
 conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
 
-# Tạo bảng products để lưu thông tin sản phẩm
+
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS products (
     product_url TEXT PRIMARY KEY,   -- URL sản phẩm, định danh duy nhất
@@ -56,8 +51,8 @@ def normalize_unit(name):
         "tuýp":"Tuýp","gói":"Gói","sachet":"Gói",
         "viên":"Viên","capsule":"Viên","tablet":"Viên"
     }.items():
-        if k in n: return v    # Nếu tìm thấy từ khóa thì trả về đơn vị
-    return "Không rõ"          # Nếu không tìm thấy thì trả về "Không rõ"
+        if k in n: return v   
+    return "Không rõ"         
 
 # -------------------------------
 # 3. CÀO DỮ LIỆU
@@ -67,7 +62,7 @@ try:
     # Khởi tạo Firefox WebDriver
     driver = webdriver.Firefox()
     # Truy cập vào danh mục sản phẩm Vitamin & Khoáng chất
-    driver.get("https://nhathuoclongchau.com.vn/thuc-pham-chuc-nang/vitamin-khoang-chat")
+    driver.get("https://nhathuoclongchau.com.vn/duoc-my-pham")
     time.sleep(2)  # Chờ trang load
 
     # Nhấn nút "Xem thêm" nhiều lần để load thêm sản phẩm
